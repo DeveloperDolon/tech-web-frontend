@@ -1,8 +1,17 @@
 
+import Banner from "../../Component/Banner/Banner";
+import ParticleBackground from "../../ParticleJs/ParticleBackground";
+
+
+
 const Home = () => {
+
     return (
-        <div>
-            some
+        <div className="">
+            <ParticleBackground></ParticleBackground>
+            <div>
+                <Banner></Banner>
+            </div>
         </div>
     );
 };
