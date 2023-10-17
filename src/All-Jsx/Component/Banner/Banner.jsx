@@ -1,22 +1,33 @@
+
 import bannerImg from "../../../assets/bannerimg.png";
 
 const Banner = () => {
-    return (
-        <div className="max-w-7xl mx-auto lg:px-0 px-5 text-white  md:h-screen h-auto grid md:grid-cols-2 grid-cols-1 items-center">
-            <div>
-                <h1 data-aos="fade-left" style={{ lineHeight: "50px" }} className="md:text-5xl text-3xl tracking-widest title-text md:py-0 pt-14">Watt&apos;s Next? Exploring Tech & Electronics Innovations</h1>
-            </div>
 
+return (
+    <div className="max-w-7xl mx-auto lg:px-0 px-5 text-white  md:h-screen h-auto grid md:grid-cols-2 grid-cols-1 items-center gap-10">
+        <div>
+            <h1
+            style={{ lineHeight: "50px" }} 
+            className=" md:text-5xl text-4xl tracking-widest title-text md:py-0 pt-14">Watt&apos;s Next<span className="font-bold text-red-600">?</span> Exploring Tech & <span className="font-bold text-red-600">Electronics</span> Innovations</h1>
 
-            <div>
-                <img data-aos="fade-right" src={bannerImg} alt="" />
-            </div>
+            <p className="md:text-base text-sm mt-8 md:leading-relaxed leading-relaxed">
+                Welcome to Tech, your one-stop destination for all things technology and electronics. Discover the latest gadgets, stay updated on cutting-edge innovations, and dive into the fascinating realms of electronics and beyond. Join us on a journey through the digital cosmos, where knowledge meets curiosity, and the future is just a click away.
+            </p>
 
-            <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto facilis perferendis dolorum quisquam est veritatis, nesciunt rem sed atque molestiae error adipisci autem similique deleniti eligendi incidunt, tempora eos, temporibus eveniet. Harum iure quae asperiores officiis voluptas culpa, consequatur ad. Optio repellendus rerum laborum voluptatem veritatis distinctio. Aut id exercitationem numquam sunt hic necessitatibus quam maiores recusandae obcaecati nobis cupiditate optio, nihil excepturi soluta odit incidunt facilis inventore nostrum dolore odio? Perferendis blanditiis iste voluptatem expedita magni delectus, natus laudantium possimus repellat aut porro officiis eaque ea adipisci debitis aspernatur impedit minus libero pariatur quo fugiat id amet? Necessitatibus in molestiae modi, minus adipisci animi a qui quia culpa architecto atque neque mollitia dicta doloribus soluta distinctio iste nesciunt nobis similique iure obcaecati! Harum aut non temporibus libero quia rem obcaecati illum exercitationem dolore fugiat eum sed culpa nostrum tempore incidunt nam ad molestias, necessitatibus tenetur debitis adipisci corrupti laudantium repellat? Enim iusto porro beatae est earum. Neque repellendus ipsum itaque ut veniam voluptate dolor nam unde. Quaerat quasi quis totam veritatis, distinctio, praesentium eaque iusto voluptate atque impedit inventore, excepturi ipsa. Reiciendis ducimus numquam natus optio itaque iste autem laudantium harum, molestiae quo magnam mollitia asperiores quibusdam! Provident possimus iure dolore ad qui delectus, expedita eius quae dolores doloremque, itaque ex nam aut, aliquam culpa similique at ut? Tempora veritatis, illum, qui quam repudiandae incidunt in ipsam autem cumque voluptas tenetur minus iure deleniti natus dignissimos maiores exercitationem velit officia magnam? Ullam eaque nostrum ipsa vitae quidem, dolore facere doloremque deleniti minima hic maiores consectetur voluptates vero consequuntur cupiditate sequi deserunt accusantium iusto aspernatur asperiores quia in illo non. Minima, tempora voluptatum quas a libero voluptate nobis ipsum quos voluptas rerum unde perferendis ea perspiciatis veritatis accusamus alias vitae consequuntur commodi! Eveniet maxime sit atque assumenda enim est quasi, ipsa inventore sed illum! Expedita corrupti sunt ullam adipisci, quia sequi eum quaerat numquam soluta minima, excepturi optio deserunt distinctio quis rem, maiores omnis iure mollitia temporibus? Commodi aspernatur magnam animi debitis libero illo. Porro quae soluta unde quod excepturi, dolorem dolorum veritatis dolore at! Eos quod dolores explicabo maxime, corporis eum temporibus. Eum rerum officia quo nam, doloremque ab maiores ex minima magni qui, odio alias provident illo mollitia. Illo quaerat, beatae nam necessitatibus corporis facilis dignissimos totam minus excepturi, magni amet libero a accusantium explicabo omnis aliquid expedita unde earum consectetur? Iure, doloribus. Tempore, deserunt praesentium. Ab odit necessitatibus molestiae magnam voluptas dignissimos iusto delectus ad asperiores atque nostrum, aut incidunt eius impedit fugiat porro sit, nulla similique quod, voluptates ut suscipit! Assumenda velit cumque, illum, maiores voluptate harum at id quae quam quod ipsa corrupti dicta numquam, architecto esse adipisci! Error itaque doloremque est et, adipisci ipsum quod repudiandae tenetur, eaque doloribus repellendus cum labore nostrum quidem! Alias, nihil ut! Distinctio obcaecati eaque nostrum ad quasi molestiae. Exercitationem, natus similique? Accusantium, ab quae! Sunt dolore ipsam fugit quo vel, similique praesentium. Sed eaque, veniam, at ipsam, est hic magni atque ullam officia incidunt placeat modi! Tenetur, corrupti?
+            <div className="mt-5">
+                <button className="btn bg-zinc-700 text-white hover:text-black">View More</button>
             </div>
         </div>
-    );
+
+        <div>
+            <div className="w-fit bg-slate-200 text-black px-5 py-3 rounded-lg shadow-white shadow-lg float-right">
+                <h1 style={{textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"}} className="text-3xl font-semibold pb-3">Discount up to 30%</h1>
+                <h2>You can get up to 30 percent <br /> discount from here.</h2>
+            </div>
+            <img src={bannerImg} alt="" />
+        </div>
+    </div>
+);
 };
 
 export default Banner;
