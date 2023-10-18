@@ -55,7 +55,7 @@ const NavBar = () => {
                         </label>
                     </div>
                     <Link className="md:text-2xl text-xl"><FaShoppingCart></FaShoppingCart></Link>
-                    <Link className="btn-primary py-2 md:px-5 px-3 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
+                    <Link to="/login" className="btn-primary py-2 md:px-5 px-3 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
                 </div>
             </div>
         </>
