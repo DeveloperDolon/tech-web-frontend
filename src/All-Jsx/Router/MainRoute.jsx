@@ -9,6 +9,7 @@ import UpdateProduct from "../Page/UpdateProduct/UpdateProduct";
 import Login from "../Page/Login/Login";
 import SignUp from "../Page/Signup/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import ProductDetails from "../Page/ProductDetails/ProductDetails";
 
 const MainRoute = createBrowserRouter([
     {
@@ -27,7 +28,7 @@ const MainRoute = createBrowserRouter([
             },
             {
                 path: "/add_products",
-                element: <AddProduct></AddProduct>
+                element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
             },
             {
                 path: "/update/:id",
@@ -41,6 +42,11 @@ const MainRoute = createBrowserRouter([
             {
                 path: "/sign_up",
                 element: <SignUp></SignUp>
+            },
+            {
+                path: "/products/:id",
+                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
+                element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
             }
         ]
     }
