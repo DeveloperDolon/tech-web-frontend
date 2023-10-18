@@ -1,8 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images-removebg-preview.png";
 import { FaShoppingCart } from 'react-icons/fa';
-const NavBar = () => {
+import { useContext } from "react";
+import { DataContext } from "../../Context-Api/Data-Context";
+import defaultUser from "../../../assets/user.png";
 
+const NavBar = () => {
+    const {user} = useContext(DataContext);
 
     const navBars = <>
         <li><NavLink className="font-semibold" to="/">Home</NavLink></li>
@@ -17,7 +21,7 @@ const NavBar = () => {
             <div className={`navbar`}>
                 <div className="navbar-start">
                     <div className="dropdown text-black">
-                        <label tabIndex={0} className="btn btn-ghost lg:hidden bg-white hover:bg-slate-400">
+                        <label tabIndex={0} className="btn sm:px-3 px-1 btn-ghost  lg:hidden bg-white hover:bg-slate-400">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -25,7 +29,7 @@ const NavBar = () => {
                         </ul>
                     </div>
                     <div>
-                        <img className="md:w-[120px] w-[80px]" src={logo} alt="" />
+                        <img className="md:w-[120px] w-[60px]" src={logo} alt="" />
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -33,7 +37,7 @@ const NavBar = () => {
                        {navBars}
                     </ul>
                 </div>
-                <div className="navbar-end gap-5 flex-wrap">
+                <div className="navbar-end sm:gap-5 gap-3 flex-wrap">
                     <div className="text-center">
                     <label
                             className="swap swap-rotate p-3 rounded-full shadow-md bg-slate-200">
@@ -55,7 +59,17 @@ const NavBar = () => {
                         </label>
                     </div>
                     <Link className="md:text-2xl text-xl"><FaShoppingCart></FaShoppingCart></Link>
-                    <Link to="/login" className="btn-primary py-2 md:px-5 px-3 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
+
+                    { 
+                        user ?
+                        <>
+                            <div>
+                                <img className="md:w-12 w-9 rounded-full" src={user.photoURL ? user.photoURL : defaultUser} alt="" />
+                            </div>
+                        </> : 
+                         <Link to="/login" className="btn-primary py-2 md:px-5 px-3 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
+                    }
+
                 </div>
             </div>
         </>

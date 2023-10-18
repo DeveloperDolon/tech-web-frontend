@@ -3,7 +3,7 @@
 const Banner = () => {
 
 return (
-    <div className="max-w-7xl mx-auto lg:px-0 px-5  h-[calc(100vh-69px)] grid md:grid-cols-2 grid-cols-1 items-center gap-10">
+    <div className="max-w-7xl mx-auto lg:px-0 px-5  md:h-[calc(100vh-69px)] h-auto grid md:grid-cols-2 grid-cols-1 items-center gap-10">
         <div>
             <h1
             data-aos="fade-left"

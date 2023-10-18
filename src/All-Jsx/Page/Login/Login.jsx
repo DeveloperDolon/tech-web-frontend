@@ -1,12 +1,73 @@
 
 import { Link } from "react-router-dom";
 import ParticleBackground from "../../ParticleJs/ParticleBackground";
+import { useContext, useState } from "react";
+import { DataContext } from "../../Context-Api/Data-Context";
+import Swal from "sweetalert2";
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 
 
 const Login = () => {
+
+    const {loginWithEmailPassword} = useContext(DataContext);
+    const [showPass, setShowPass] = useState(false);
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        const regex = /[A-Z]/;
+        const speRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\|]/;
+
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+
+        if(password.length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Password Must be 6 characters!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+              return;
+        } else if(!regex.test(password)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Password must contain capital letter!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+              return;
+        } else if(!speRegex.test(password)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Password must contain special character!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+              return;
+        }
+
+        loginWithEmailPassword(email, password)
+        .then(() => {
+            Swal.fire(
+                'Login Successful!',
+                'You clicked the button!',
+                'success'
+              )
+        }).catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.message,
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+        })
+    }
+
     return (
-        <div className="md:h-screen flex flex-col justify-center items-center">
+        <div className="md:h-[120vh] flex flex-col justify-center items-center">
             <ParticleBackground></ParticleBackground>
 
             <div className="absolute top-10 left-20">
@@ -15,19 +76,33 @@ const Login = () => {
 
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-white dark:bg-white dark:text-black md:mt-0 mt-32 shadow-white shadow-xl">
                 <h1 className="text-2xl font-bold text-center">Login</h1>
-                <form noValidate="" action="" className="space-y-6">
+                <form onSubmit={handleLogin} noValidate="" action="" className="space-y-6">
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="username" className="block dark:text-gray-400">Username</label>
-                        <input type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <label htmlFor="email" className="block dark:text-gray-400">Email</label>
+                        <input type="email" name="email" required id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
+
                     <div className="space-y-1 text-sm">
                         <label htmlFor="password" className="block dark:text-gray-400">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <div className="relative">
+                            <input type={showPass ? "text":"password"} name="password" id="password" placeholder="Password" required className="w-full px-4 duration-500 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+
+                            <span className="absolute text-white right-2 top-[25%] text-xl">
+                                <span onClick={() => setShowPass(!showPass)}>
+                                    {
+                                        showPass ? 
+                                        <AiFillEyeInvisible className="duration-300"></AiFillEyeInvisible> : 
+                                        <AiFillEye className="duration-300"></AiFillEye>
+                                    }
+                                </span>
+                            </span>
+                        </div>
                         <div className="flex justify-end text-xs dark:text-gray-400">
                             <a rel="noopener noreferrer" href="#">Forgot Password?</a>
                         </div>
                     </div>
-                    <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
+
+                    <button type="submit" className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>

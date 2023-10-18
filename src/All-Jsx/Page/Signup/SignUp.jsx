@@ -1,7 +1,73 @@
 import { Link } from "react-router-dom";
 import ParticleBackground from "../../ParticleJs/ParticleBackground";
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { useContext, useState } from "react";
+import { DataContext } from "../../Context-Api/Data-Context";
+import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
+    const {createUserWithEmailPassword} = useContext(DataContext);
+    const [showPass, setShowPass] = useState(false);
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        const regex = /[A-Z]/;
+        const speRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\|]/;
+
+        const name = e.target.username.value;
+        const photoUrl = e.target.photo.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        if(password.length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Password Must be 6 characters!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+              return;
+        } else if(!regex.test(password)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Password must contain capital letter!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+              return;
+        } else if(!speRegex.test(password)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Password must contain special character!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+              return;
+        }
+
+        createUserWithEmailPassword(email, password)
+        .then(res => {
+            updateProfile(res.user, {
+                displayName: name, photoURL: photoUrl
+            }).then(() => {
+                Swal.fire(
+                    'Sign up Successful!',
+                    'You clicked the button!',
+                    'success'
+                  )
+            }).catch(err => console.error(err.message))
+        }).catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.message,
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+        })
+        
+    }
+
     return (
         <div className=" my-28 flex flex-col justify-center items-center">
         <ParticleBackground></ParticleBackground>
@@ -12,10 +78,10 @@ const SignUp = () => {
 
         <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-white dark:bg-white dark:text-black md:mt-0 mt-32 shadow-white shadow-xl">
             <h1 className="text-2xl font-bold text-center">Sign Up</h1>
-            <form noValidate="" action="" className="space-y-6">
+            <form onSubmit={handleSignUp} noValidate="" action="" className="space-y-6">
                 <div className="space-y-1 text-sm">
                     <label htmlFor="username" className="block dark:text-gray-400">Username</label>
-                    <input type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                    <input type="text" name="username" required id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                 </div>
                 <div className="space-y-1 text-sm">
                     <label htmlFor="photo" className="block dark:text-gray-400">Photo URL</label>
@@ -23,11 +89,23 @@ const SignUp = () => {
                 </div>
                 <div className="space-y-1 text-sm">
                     <label htmlFor="email" className="block dark:text-gray-400">Email</label>
-                    <input type="email" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                    <input type="email" name="email" required id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                 </div>
                 <div className="space-y-1 text-sm">
-                    <label htmlFor="password" className="block dark:text-gray-400">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                    <label htmlFor="password"  className="block dark:text-gray-400">Password</label>
+                    <div className="relative">
+                        <input type={showPass ? "text":"password"} required name="password" id="password" placeholder="Password" className="w-full px-4 duration-500 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+
+                       <span className="absolute text-white right-2 top-[25%] text-xl">
+                            <span onClick={() => setShowPass(!showPass)}>
+                                {
+                                    showPass ? 
+                                    <AiFillEyeInvisible className="duration-300"></AiFillEyeInvisible> : 
+                                    <AiFillEye className="duration-300"></AiFillEye>
+                                }
+                            </span>
+                        </span>
+                    </div>
                     <div className="flex justify-end text-xs dark:text-gray-400">
                         <a rel="noopener noreferrer" href="#">Forgot Password?</a>
                     </div>
@@ -57,7 +135,7 @@ const SignUp = () => {
                 </button>
             </div>
             <p className="text-sm text-center sm:px-6 dark:text-gray-500 font-semibold ">Do you have an account?
-                <Link to="/sign_up" rel="noopener noreferrer" className="underline font-bold text-green-500">Sign in</Link>
+                <Link to="/login" rel="noopener noreferrer" className="underline font-bold text-green-500">Sign in</Link>
             </p>
         </div>
     </div>

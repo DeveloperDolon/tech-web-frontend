@@ -32,7 +32,7 @@ const Home = () => {
                 background: `url("${bgImg}") top center no-repeat`,
                 backgroundSize: "cover"
             }}
-            className="h-screen"
+            className="md:h-screen h-auto md:bg-cover"
             >
                 <div className="max-w-7xl mx-auto">
                     <NavBar className="text-white"></NavBar>
