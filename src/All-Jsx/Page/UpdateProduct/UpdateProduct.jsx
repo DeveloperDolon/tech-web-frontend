@@ -84,7 +84,7 @@ const UpdateProduct = () => {
                         </div>
 
                         <div className="mt-10 flex justify-center">
-                            <input className="title-text w-fit px-10 bg-sky-400 text-black py-3 rounded-md text-2xl cursor-pointer hover:bg-neutral-400 duration-300" type="submit" value="Add Product" />
+                            <input className="title-text w-fit px-10 bg-sky-400 text-black py-3 rounded-md text-2xl cursor-pointer hover:bg-neutral-400 duration-300" type="submit" value="Update Product" />
                         </div>
                     </form>
                 </div>

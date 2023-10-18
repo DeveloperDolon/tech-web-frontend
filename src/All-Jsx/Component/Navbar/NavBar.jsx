@@ -18,7 +18,7 @@ const NavBar = () => {
 
     return (
         <>
-            <div className={`navbar`}>
+            <div className={`navbar relative`}>
                 <div className="navbar-start">
                     <div className="dropdown text-black">
                         <label tabIndex={0} className="btn sm:px-3 px-1 btn-ghost  lg:hidden bg-white hover:bg-slate-400">
@@ -64,7 +64,14 @@ const NavBar = () => {
                         user ?
                         <>
                             <div>
-                                <img className="md:w-12 w-9 rounded-full" src={user.photoURL ? user.photoURL : defaultUser} alt="" />
+                                <img className="md:w-12 w-9 rounded-full cursor-pointer" src={user.photoURL ? user.photoURL : defaultUser} alt="" />
+
+                                <div className="absolute right-1 bg-white px-6 py-7 shadow-xl rounded-xl w-[15%]">
+                                    <ul className="space-y-2">
+                                        <li className="md:text-base text-sm font-semibold">{user.displayName}</li>
+                                        <li className="md:text-base text-sm font-semibold"><button>Log out</button></li>
+                                    </ul>
+                                </div>
                             </div>
                         </> : 
                          <Link to="/login" className="btn-primary py-2 md:px-5 px-3 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
