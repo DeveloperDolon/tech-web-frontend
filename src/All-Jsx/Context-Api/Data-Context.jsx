@@ -1,7 +1,7 @@
 
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
 
@@ -10,19 +10,29 @@ export const DataContext = createContext();
 const ContextApi = ({children}) => {
     const [user, setUser] = useState(null);
 
+    const [loading, setLoading] = useState(true);
+
     const auth = getAuth(app);
 
     const loginWithEmailPassword = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     const createUserWithEmailPassword = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
+    }
+
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
     }
 
     useEffect(() => {
         onAuthStateChanged(auth,(currentUser) => {
             setUser(currentUser);
+            setLoading(false);
             console.log(currentUser)
         })
     }, []);
@@ -31,7 +41,9 @@ const ContextApi = ({children}) => {
     const allData = {
         loginWithEmailPassword, 
         createUserWithEmailPassword,
-        user
+        user,
+        logOut,
+        loading
     }
 
     return (

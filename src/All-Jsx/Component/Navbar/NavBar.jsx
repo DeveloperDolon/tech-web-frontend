@@ -1,12 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/images-removebg-preview.png";
 import { FaShoppingCart } from 'react-icons/fa';
-import { useContext } from "react";
+import { BiLogOutCircle } from 'react-icons/bi';
+import { useContext, useState } from "react";
 import { DataContext } from "../../Context-Api/Data-Context";
 import defaultUser from "../../../assets/user.png";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
-    const {user} = useContext(DataContext);
+    const {user, logOut} = useContext(DataContext);
+    const [showUserOption, setShowUserOption] = useState(false);
 
     const navBars = <>
         <li><NavLink className="font-semibold" to="/">Home</NavLink></li>
@@ -15,6 +18,17 @@ const NavBar = () => {
         <li><NavLink className="font-semibold" to="/jd">Contact Us</NavLink></li>
         <li><NavLink className="font-semibold" to="/jd">Blog</NavLink></li>
     </>;
+
+    const handleSignOut = () => {
+        logOut()
+        .then(() => {
+            Swal.fire(
+                'Log out Successful!',
+                'You clicked the button!',
+                'success'
+              )
+        }).catch(err => console.log(err));
+    }
 
     return (
         <>
@@ -64,17 +78,17 @@ const NavBar = () => {
                         user ?
                         <>
                             <div>
-                                <img className="md:w-12 w-9 rounded-full cursor-pointer" src={user.photoURL ? user.photoURL : defaultUser} alt="" />
+                                <img onClick={() => setShowUserOption(!showUserOption)} className="md:w-12 w-9 rounded-full cursor-pointer" src={user.photoURL ? user.photoURL : defaultUser} alt="" />
 
-                                <div className="absolute right-1 bg-white px-6 py-7 shadow-xl rounded-xl w-[15%]">
+                                <div className={`absolute duration-300 ease-in right-1 top-[80%] ${showUserOption ? "px-6 py-7 w-auto" : "w-0 h-0"} overflow-hidden bg-white shadow-xl rounded-xl z-40`}>
                                     <ul className="space-y-2">
                                         <li className="md:text-base text-sm font-semibold">{user.displayName}</li>
-                                        <li className="md:text-base text-sm font-semibold"><button>Log out</button></li>
+                                        <li className="md:text-base text-sm font-semibold"><button onClick={handleSignOut} className="flex gap-2 items-center btn btn-sm"><BiLogOutCircle className="md:text-xl text-lg"></BiLogOutCircle> Log out</button></li>
                                     </ul>
                                 </div>
                             </div>
                         </> : 
-                         <Link to="/login" className="btn-primary py-2 md:px-5 px-3 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
+                         <Link to="/login" className="btn-primary sm:py-2 py-1 sm:px-5 px-2 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
                     }
 
                 </div>

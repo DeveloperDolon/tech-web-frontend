@@ -27,7 +27,7 @@ const Home = () => {
     });
 
     return (
-        <div>
+        <div className="">
             <div style={{
                 background: `url("${bgImg}") top center no-repeat`,
                 backgroundSize: "cover"
