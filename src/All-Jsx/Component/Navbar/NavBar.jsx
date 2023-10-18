@@ -82,7 +82,7 @@ const NavBar = () => {
 
                                 <div className={`absolute duration-300 ease-in right-1 top-[80%] ${showUserOption ? "px-6 py-7 w-auto" : "w-0 h-0"} overflow-hidden bg-white shadow-xl rounded-xl z-40`}>
                                     <ul className="space-y-2">
-                                        <li className="md:text-base text-sm font-semibold">{user.displayName}</li>
+                                        <li className="md:text-base text-sm font-semibold text-black">{user.displayName}</li>
                                         <li className="md:text-base text-sm font-semibold"><button onClick={handleSignOut} className="flex gap-2 items-center btn btn-sm"><BiLogOutCircle className="md:text-xl text-lg"></BiLogOutCircle> Log out</button></li>
                                     </ul>
                                 </div>
