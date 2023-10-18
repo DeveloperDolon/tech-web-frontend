@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "../Component/Navbar/NavBar";
 import AOS from "aos";
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
@@ -17,10 +16,6 @@ const MainLayout = () => {
 
     return (
         <div>
-
-            <div className="max-w-7xl mx-auto">
-                <NavBar></NavBar>
-            </div>
 
             <div>
                 <Outlet></Outlet>
