@@ -22,7 +22,7 @@ const Brand = () => {
                     <NavBar></NavBar>
 
                     <div>
-                        <h1 className="md:text-4xl text-2xl text-center font-semibold mt-5">Product of {brand.name}</h1>
+                        <h1 className="md:text-4xl text-2xl text-center font-semibold mt-5">Products of {brand.name}</h1>
                     </div>
                 </div>
                 <Slider images={brand.sliderImages}></Slider>
