@@ -15,13 +15,11 @@ const MainLayout = () => {
     });
 
     return (
-        <div>
-
+        <>
             <div>
                 <Outlet></Outlet>
             </div>
-
-        </div>
+        </>
     );
 };
 
