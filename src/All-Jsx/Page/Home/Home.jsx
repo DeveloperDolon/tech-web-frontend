@@ -9,6 +9,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import Footer from "../../Component/Footer/Footer";
 import BrandsMarquee from "../../Component/BrandsSliding/BrandsMarquee";
 import NewProduct from "../../Component/NewProduct/NewProduct";
+import DiscountBanner from "../../Component/DiscountBanner/DiscountBanner";
 
 const Home = () => {
 
@@ -17,7 +18,7 @@ const Home = () => {
 
     const handleClick = (name) => {
         navigate(`brands/${name}`);
-    }
+    }   
 
     useEffect(() => {
         AOS.init({
@@ -63,16 +64,16 @@ const Home = () => {
 
             </div>
 
-            <div className=" bg-gray-200 overflow-x-hidden">
+            <div className=" overflow-x-hidden">
                 <div className="py-10 max-w-7xl mx-auto md:px-2 px-5">
 
                     <div id="features" className="mx-auto max-w-6xl">
                         <p className="text-center text-base font-semibold leading-7 text-primary-500">Features</p>
                         <h2 className="text-center font-display text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
-                            Writing has never been so easy
+                            Explore What Sets Us Apart
                         </h2>
                         <ul className="mt-16 grid grid-cols-1 gap-6 text-center text-slate-700 md:grid-cols-3">
-                            <li data-aos="fade-left" className="rounded-xl bg-white px-6 py-8 shadow-sm">
+                            <li data-aos="fade-left" className="rounded-xl bg-white px-6 py-8 shadow-lg">
 
                                 <img src="https://www.svgrepo.com/show/530438/ddos-protection.svg" alt="" className="mx-auto h-10 w-10" />
                                 <h3 className="my-3 font-display font-medium">Product Catalog</h3>
@@ -82,7 +83,7 @@ const Home = () => {
                                 </p>
 
                             </li>
-                            <li data-aos="fade-right" className="rounded-xl bg-white px-6 py-8 shadow-sm">
+                            <li data-aos="fade-right" className="rounded-xl bg-white px-6 py-8 shadow-lg">
 
                                 <img src="https://www.svgrepo.com/show/530442/port-detection.svg"
                                     alt="" className="mx-auto h-10 w-10" />
@@ -93,7 +94,7 @@ const Home = () => {
                                 </p>
 
                             </li>
-                            <li data-aos="fade-left" className="rounded-xl bg-white px-6 py-8 shadow-sm">
+                            <li data-aos="fade-left" className="rounded-xl bg-white px-6 py-8 shadow-lg">
                                 <img src="https://www.svgrepo.com/show/530444/availability.svg" alt="" className="mx-auto h-10 w-10" />
                                 <h3 className="my-3 font-display font-medium">Custom settings</h3>
                                 <p className="mt-1.5 text-sm leading-6 text-secondary-500">
@@ -103,7 +104,7 @@ const Home = () => {
                                 </p>
 
                             </li>
-                            <li data-aos="fade-right" className="rounded-xl bg-white px-6 py-8 shadow-sm">
+                            <li data-aos="fade-right" className="rounded-xl bg-white px-6 py-8 shadow-lg">
                                 <a className="group">
                                     <img src="https://www.svgrepo.com/show/530440/machine-vision.svg" alt="" className="mx-auto h-10 w-10" />
                                     <h3 className="my-3 font-display font-medium group-hover:text-primary-500">Free trial</h3>
@@ -112,7 +113,7 @@ const Home = () => {
                                         many payment options including pay-as-you-go and subscription.</p>
                                 </a>
                             </li>
-                            <li data-aos="fade-left" className="rounded-xl bg-white px-6 py-8 shadow-sm">
+                            <li data-aos="fade-left" className="rounded-xl bg-white px-6 py-8 shadow-lg">
                                 <a className="group">
                                     <img src="https://www.svgrepo.com/show/530450/page-analysis.svg" alt="" className="mx-auto h-10 w-10" />
                                     <h3 className="my-3 font-display font-medium group-hover:text-primary-500">
@@ -123,7 +124,7 @@ const Home = () => {
                                         education, lifestyle and creativity to inspire your potential. </p>
                                 </a>
                             </li>
-                            <li data-aos="fade-right" className="rounded-xl bg-white px-6 py-8 shadow-sm">
+                            <li data-aos="fade-right" className="rounded-xl bg-white px-6 py-8 shadow-lg">
                                 <a className="group">
                                     <img src="https://www.svgrepo.com/show/530453/mail-reception.svg" alt="" className="mx-auto h-10 w-10" />
                                     <h3 className="my-3 font-display font-medium group-hover:text-primary-500">Use Anywhere</h3>
@@ -139,6 +140,10 @@ const Home = () => {
             <div>
                 <h1 className="my-10 pt-10 text-center text-2xl md:text-4xl font-bold ">Customer Reviews</h1>
                 <BrandsMarquee></BrandsMarquee>
+            </div>
+
+            <div className="mt-20 md:mt-32 max-w-7xl mx-auto lg:px-0 px-5">
+                <DiscountBanner></DiscountBanner>
             </div>
 
             <div>
