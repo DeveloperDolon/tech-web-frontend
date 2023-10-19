@@ -7,6 +7,7 @@ import NavBar from "../../Component/Navbar/NavBar";
 import bgImg from "../../../assets/bg-img.jpg";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Footer from "../../Component/Footer/Footer";
+import BrandsMarquee from "../../Component/BrandsSliding/BrandsMarquee";
 
 
 const Home = () => {
@@ -134,7 +135,12 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            
+
+            <div>
+                <h1 className="my-10 pt-10 text-center text-2xl md:text-4xl font-bold ">Customer Reviews</h1>
+                <BrandsMarquee></BrandsMarquee>
+            </div>
+
             <Footer></Footer>
         </div>
     );
