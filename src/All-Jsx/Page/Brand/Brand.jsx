@@ -25,7 +25,7 @@ const Brand = () => {
                         <h1 className="md:text-4xl text-2xl text-center font-semibold mt-5">Products of {brand.name}</h1>
                     </div>
                 </div>
-                <Slider images={brand.sliderImages}></Slider>
+                <Slider images={brand.sliderImages} name={brand.name}></Slider>
             </div>
 
             <div className="max-w-7xl mx-auto gap-8 lg:px-0 px-5 grid grid-cols-1 md:my-20 my-10 my md:grid-cols-2">

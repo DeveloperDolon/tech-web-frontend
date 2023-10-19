@@ -6,15 +6,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import PropTypes from "prop-types";
-import './styles.css';
-
+import "./styles.css"
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 const Slider = ({images}) => {
 
     return (
-        <div className='sm:h-screen h-[200px] bg-slate-300 md:my-16 my-10'>
+        <div className={`sm:h-screen h-[200px] bg-slate-300 md:my-16 my-10`}> 
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
@@ -27,7 +26,7 @@ const Slider = ({images}) => {
                 }}
                 navigation={true}
                 modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
+                className={` mySwiper swiper-wrapper `}
             >
                 <SwiperSlide><img src={images?.one} alt="" /></SwiperSlide>
                 <SwiperSlide><img src={images?.tow} alt="" /></SwiperSlide>
@@ -40,5 +39,5 @@ const Slider = ({images}) => {
 export default Slider;
 
 Slider.propTypes = {
-    images: PropTypes.object
+    images: PropTypes.object,
 }
