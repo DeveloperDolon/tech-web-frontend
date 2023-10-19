@@ -3,6 +3,7 @@ import NavBar from "../../Component/Navbar/NavBar";
 import Product from "../../Component/Product/Product";
 import { useEffect, useState } from "react";
 import Slider from "../../Component/Slider/Slider";
+import Footer from "../../Component/Footer/Footer";
 
 const Brand = () => {
     const [brand, setBrand] = useState({});
@@ -33,6 +34,8 @@ const Brand = () => {
                     product.map(item => <Product key={item.id} data={item}></Product> )
                 }
             </div>
+
+            <Footer></Footer>
         </div>
     );
 };

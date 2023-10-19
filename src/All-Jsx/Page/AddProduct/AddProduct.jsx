@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import NavBar from "../../Component/Navbar/NavBar";
 import ParticleBackground from "../../ParticleJs/ParticleBackground";
+import Footer from "../../Component/Footer/Footer";
 const AddProduct = () => {
     const handleAddingProduct = (e) => {
 
@@ -14,8 +15,8 @@ const AddProduct = () => {
         const description = e.target.description.value;
         const image = e.target.photo.value;
 
-        const productInfo = {name, brandName, type, rating, price, description, image};
-        
+        const productInfo = { name, brandName, type, rating, price, description, image };
+
         fetch("http://localhost:5000/brands", {
             method: "POST",
             headers: {
@@ -23,14 +24,14 @@ const AddProduct = () => {
             },
             body: JSON.stringify(productInfo)
         })
-        .then(res => res.json())
-        .then(() => {
-            Swal.fire(
-                'Product added successful!',
-                'You clicked the button!',
-                'success'
-            )
-        });
+            .then(res => res.json())
+            .then(() => {
+                Swal.fire(
+                    'Product added successful!',
+                    'You clicked the button!',
+                    'success'
+                )
+            });
 
         e.target.name.value = "";
         e.target.brand.value = "";
@@ -42,7 +43,7 @@ const AddProduct = () => {
     }
 
     return (
-        <div className="pb-20">
+        <div className="">
             <div className="max-w-7xl mx-auto text-white">
                 <NavBar></NavBar>
             </div>
@@ -52,7 +53,7 @@ const AddProduct = () => {
                 <div className="sm:px-14 sm:py-14 px-5 py-14 rounded-lg my-10 text-white">
                     <h1 className="title-text text-4xl text-center font-semibold">Add New Product</h1>
                     <p className="my-8 md:px-20 leading-relaxed text-center">
-                    It is a long established fact that a reader will be distraceted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here.
+                        It is a long established fact that a reader will be distraceted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here.
                     </p>
 
                     <form onSubmit={handleAddingProduct}>
@@ -62,7 +63,15 @@ const AddProduct = () => {
                                     <input placeholder="Enter Product Name" className="block text-black w-full py-3 px-3 font-normal rounded-md" type="text" name="name" id="" />
                                 </label>
                                 <label className="block space-y-5 font-bold" htmlFor="brand">Brand Name <br />
-                                    <input placeholder="Enter Brand Name" className="block text-black w-full py-3 px-3 font-normal rounded-md" type="text" name="brand" id="" />
+                                    <select name="brand" className="select w-full block text-gray-500 font-normal text-base">
+                                        <option disabled selected>Select brand name</option>
+                                        <option>Samsung</option>
+                                        <option>Acer</option>
+                                        <option>Apple</option>
+                                        <option>Intel</option>
+                                        <option>Vivo</option>
+                                        <option>Sony</option>
+                                    </select>
                                 </label>
                                 <label className="block space-y-5 font-bold" htmlFor="type">Product Type <br />
                                     <input placeholder="Enter Product Type" className="block text-black w-full py-3 px-3 font-normal rounded-md" type="text" name="type" id="" />
@@ -94,6 +103,7 @@ const AddProduct = () => {
                     </form>
                 </div>
             </div>
+            <Footer className="bg-white"></Footer>
         </div>
     );
 };

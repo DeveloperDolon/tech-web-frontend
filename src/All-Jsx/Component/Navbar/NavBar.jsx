@@ -72,7 +72,11 @@ const NavBar = () => {
 
                         </label>
                     </div>
-                    <Link className="md:text-2xl text-xl"><FaShoppingCart></FaShoppingCart></Link>
+                    <NavLink to="/carts"
+                    className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "text-sky-500 md:text-2xl text-xl" : "md:text-2xl text-xl"
+                    }
+                    ><FaShoppingCart></FaShoppingCart></NavLink>
 
                     { 
                         user ?

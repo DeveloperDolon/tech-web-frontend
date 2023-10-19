@@ -8,7 +8,7 @@ return (
             <h1
             data-aos="fade-left"
             style={{ lineHeight: "50px" }} 
-            className=" md:text-5xl text-4xl tracking-widest title-text md:py-0 pt-14">Watt&apos;s Next<span className="font-bold text-red-600">?</span> Exploring Tech & <span className="font-bold text-red-600">Electronics</span> Innovations</h1>
+            className=" md:text-5xl text-4xl tracking-widest title-text font-semibold md:py-0 pt-14">Watt&apos;s Next<span className="font-bold text-red-600">?</span> Exploring Tech & <span className="font-bold text-red-600">Electronics</span> Innovations</h1>
 
             <p data-aos="fade-right" className="md:text-3xl font-semibold mt-8">
                 Welcome to Tech, your one-stop destination for all things technology and electronics.

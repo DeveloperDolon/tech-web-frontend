@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import NavBar from "../../Component/Navbar/NavBar";
 import ParticleBackground from "../../ParticleJs/ParticleBackground";
 import Swal from "sweetalert2";
+import Footer from "../../Component/Footer/Footer";
 
 const UpdateProduct = () => {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ const UpdateProduct = () => {
     }
 
     return (
-        <div className="pb-20">
+        <div className="">
             <div className="max-w-7xl mx-auto text-white">
                 <NavBar></NavBar>
             </div>
@@ -66,7 +67,15 @@ const UpdateProduct = () => {
                                     <input placeholder="Enter Product Name" defaultValue={data.name} className="block text-black w-full py-3 px-3 font-normal rounded-md" type="text" name="name" id="" />
                                 </label>
                                 <label className="block space-y-5 font-bold" htmlFor="brand">Brand Name <br />
-                                    <input placeholder="Enter Brand Name" defaultValue={data.brandName} className="block text-black w-full py-3 px-3 font-normal rounded-md" type="text" name="brand" id="" />
+                                    <select name="brand" defaultValue={data.brandName} className="select w-full block text-gray-500 font-normal text-base">
+                                        <option disabled selected>Select brand name</option>
+                                        <option>Samsung</option>
+                                        <option>Acer</option>
+                                        <option>Apple</option>
+                                        <option>Intel</option>
+                                        <option>Vivo</option>
+                                        <option>Sony</option>
+                                    </select>
                                 </label>
                                 <label className="block space-y-5 font-bold" htmlFor="type">Product Type <br />
                                     <input placeholder="Enter Product Type" defaultValue={data.type} className="block text-black w-full py-3 px-3 font-normal rounded-md" type="text" name="type" id="" />
@@ -98,6 +107,8 @@ const UpdateProduct = () => {
                     </form>
                 </div>
             </div>
+            <Footer className="bg-white">
+            </Footer>
         </div>
     )
 };

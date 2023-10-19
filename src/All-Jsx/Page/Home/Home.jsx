@@ -52,7 +52,7 @@ const Home = () => {
                         brands.map(item => <>
                             <div data-aos="flip-left" onClick={() => handleClick(item.name)} key={item.id} className={`bg-[#e3f5ff] rounded-xl px-7 py-10 cursor-pointer`}>
                                 <div className="flex justify-center">
-                                    <img className={`${item.id === 2 || item.id === 1 ? "h-32" : "h-52"} md:w-[50%] w-full rounded-lg`} src={item.image} alt="" />
+                                    <img className={`h-52 md:w-[50%] w-full rounded-lg`} src={item.image} alt="" />
                                 </div>
                                 <div>
                                     <h1 className="text-center pt-5 text-4xl font-semibold">{item.name}</h1>
