@@ -34,7 +34,7 @@ const NavBar = () => {
         <>
             <div className={`navbar relative`}>
                 <div className="navbar-start">
-                    <div className="dropdown text-black">
+                    <div className="dropdown z-40 text-black">
                         <label tabIndex={0} className="btn sm:px-3 px-1 btn-ghost  lg:hidden bg-white hover:bg-slate-400">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>

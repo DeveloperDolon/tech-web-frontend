@@ -1,8 +1,10 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import NavBar from "../../Component/Navbar/NavBar";
 import ParticleBackground from "../../ParticleJs/ParticleBackground";
+import Swal from "sweetalert2";
 
 const UpdateProduct = () => {
+    const navigate = useNavigate();
 
     const data = useLoaderData();
 
@@ -20,15 +22,22 @@ const UpdateProduct = () => {
 
         const productInfo = { name, brandName, type, rating, price, description, image };
 
-        fetch(`http://localhost:5000/products/${data._id}`, {
-            method: "PUT",
+        fetch(`http://localhost:5000/products/${data.name}`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(productInfo)
         })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(() => {
+                Swal.fire(
+                    'Product update successful!',
+                    'You clicked the button!',
+                    'success'
+                )
+                navigate(-1);
+            });
 
         // e.target.name.value = "";
         // e.target.brand.value = "";

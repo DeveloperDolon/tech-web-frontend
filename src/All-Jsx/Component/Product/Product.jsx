@@ -22,7 +22,7 @@ const Product = ({ data }) => {
                         initialRating={data.rating}
                     />
                     <br />
-                    <div className="mt-2 flex gap-3">
+                    <div className="mt-2 flex sm:flex-row flex-col gap-3">
                         <Link to={`/products/${data._id}`} className="md:btn md:bg-sky-500 md:text-white btn-sm rounded-md font-semibold bg-sky-500 text-white hover:text-black">View Details</Link>
 
                         <Link to={`/update/${data._id}`} className="md:btn md:bg-stone-400 md:text-white btn-sm rounded-md font-semibold bg-stone-400 text-white hover:text-black">Update</Link>

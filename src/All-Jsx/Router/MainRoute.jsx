@@ -10,6 +10,7 @@ import Login from "../Page/Login/Login";
 import SignUp from "../Page/Signup/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import ProductDetails from "../Page/ProductDetails/ProductDetails";
+import ErrorPage from "../Page/ErrorPage/ErrorPage";
 
 const MainRoute = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const MainRoute = createBrowserRouter([
                 path: "/products/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
                 element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
+            },
+            {
+                path: "/*",
+                element: <ErrorPage></ErrorPage>
             }
         ]
     }

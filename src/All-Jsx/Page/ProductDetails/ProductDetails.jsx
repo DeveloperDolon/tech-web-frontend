@@ -24,7 +24,7 @@ const ProductDetails = () => {
                     
 
                     <div className="flex flex-wrap my-5 gap-5">
-                        <h2 className="px-5 py-2 bg-orange-500 text-white rounded-3xl">Price : <span className="font-bold font-sans">{product.price}</span></h2>
+                        <h2 className="px-5 py-2 bg-orange-500 text-white rounded-3xl">Price : <span className="font-bold font-sans">{product.price} TK</span></h2>
                         <h2 className="px-5 py-2 bg-red-500 text-white rounded-3xl">Brand : <span className="font-bold font-sans">{product.brandName}</span></h2>
                         <h2 className="px-5 py-2 bg-violet-500 text-white rounded-3xl">Category : <span className="font-bold font-sans">{product.type}</span></h2>
                     </div>
@@ -33,12 +33,11 @@ const ProductDetails = () => {
                         <Rating
                         className="my-3"
                         initialRating={product.rating}
-                    />
+                        />
                     </div>
 
                     <div className="space-x-8 mt-3">
                         <button className="btn bg-indigo-500 text-white hover:bg-slate-600">Add to Cart</button>
-                        <button className="btn bg-amber-500 text-white">Update</button>
                     </div>
                 </div>
             </div>

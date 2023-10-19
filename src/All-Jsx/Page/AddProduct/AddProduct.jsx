@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import NavBar from "../../Component/Navbar/NavBar";
 import ParticleBackground from "../../ParticleJs/ParticleBackground";
 const AddProduct = () => {
@@ -23,7 +24,13 @@ const AddProduct = () => {
             body: JSON.stringify(productInfo)
         })
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(() => {
+            Swal.fire(
+                'Product added successful!',
+                'You clicked the button!',
+                'success'
+            )
+        });
 
         e.target.name.value = "";
         e.target.brand.value = "";
