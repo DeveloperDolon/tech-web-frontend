@@ -13,6 +13,7 @@ import ProductDetails from "../Page/ProductDetails/ProductDetails";
 import ErrorPage from "../Page/ErrorPage/ErrorPage";
 import CartPage from "../Page/Cart/CartPage";
 
+
 const MainRoute = createBrowserRouter([
     {
         path: "/",
@@ -56,7 +57,6 @@ const MainRoute = createBrowserRouter([
             },
             {
                 path: "/carts",
-                loader: () => fetch("http://localhost:5000/carts"),
                 element: <PrivateRoute><CartPage></CartPage></PrivateRoute>
             }
         ]

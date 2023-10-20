@@ -2,39 +2,18 @@ import { useLoaderData } from "react-router-dom";
 import NavBar from "../../Component/Navbar/NavBar";
 import Rating from "react-rating";
 import Footer from "../../Component/Footer/Footer";
-import Swal from "sweetalert2";
+import { setCartId } from "../../localStorage/localStroage";
 
 
 const ProductDetails = () => {
 
     const product = useLoaderData();
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (id) => {
         
-        fetch("http://localhost:5000/carts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(product)
-        }).then((res) => {
-            if(res.status === 200) {
-                Swal.fire(
-                    'Product added cart successfully!',
-                    'You clicked the button!',
-                    'success'
-                )
-                return;
-            }
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "Your product is already added to cart.",
-                footer: '<a href="">Why do I have this issue?</a>'
-              })
-        }).catch(err => {
-            console.log(err.message);
-        })
+        // fetch("http://localhost:5000/carts"
+
+        setCartId(id);
     }
 
     return (
@@ -68,7 +47,7 @@ const ProductDetails = () => {
                         </div>
 
                         <div className="space-x-8 mt-3">
-                            <button onClick={handleAddToCart} className="btn bg-indigo-500 text-white hover:bg-slate-600">Add to Cart</button>
+                            <button onClick={() => handleAddToCart(product._id)} className="btn bg-indigo-500 text-white hover:bg-slate-600">Add to Cart</button>
                         </div>
                     </div>
                 </div>
