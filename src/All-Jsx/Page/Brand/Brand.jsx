@@ -4,39 +4,46 @@ import Product from "../../Component/Product/Product";
 import { useEffect, useState } from "react";
 import Slider from "../../Component/Slider/Slider";
 import Footer from "../../Component/Footer/Footer";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Brand = () => {
     const [brand, setBrand] = useState({});
     const product = useLoaderData();
-    const {brandName} = useParams();
+    const { brandName } = useParams();
 
     useEffect(() => {
         fetch(`http://localhost:5000/brand/${brandName}`)
-        .then(res => res.json())
-        .then(data => setBrand(data));
+            .then(res => res.json())
+            .then(data => setBrand(data));
     }, []);
 
     return (
-        <div>
-            <div className="">
-                <div className="max-w-7xl mx-auto">
-                    <NavBar></NavBar>
+        <HelmetProvider>
+            <Helmet>
+                <title>Tech | {brandName}</title>
+                <link rel="canonical" href="https://www.tacobell.com/" />
+            </Helmet>
+            <div>
+                <div className="">
+                    <div className="max-w-7xl mx-auto">
+                        <NavBar></NavBar>
 
-                    <div>
-                        <h1 className="md:text-4xl text-2xl text-center font-semibold mt-5">Products of {brand.name}</h1>
+                        <div>
+                            <h1 className="md:text-4xl text-2xl text-center font-semibold mt-5">Products of {brand.name}</h1>
+                        </div>
                     </div>
+                    <Slider images={brand.sliderImages} name={brand.name}></Slider>
                 </div>
-                <Slider images={brand.sliderImages} name={brand.name}></Slider>
-            </div>
 
-            <div className="max-w-7xl mx-auto gap-8 lg:px-0 px-5 grid grid-cols-1 md:my-20 my-10 my md:grid-cols-2">
-                {
-                    product.map(item => <Product key={item.id} data={item}></Product> )
-                }
-            </div>
+                <div className="max-w-7xl mx-auto gap-8 lg:px-0 px-5 grid grid-cols-1 md:my-20 my-10 my md:grid-cols-2">
+                    {
+                        product.map(item => <Product key={item.id} data={item}></Product>)
+                    }
+                </div>
 
-            <Footer></Footer>
-        </div>
+                <Footer></Footer>
+            </div>
+        </HelmetProvider>
     );
 };
 

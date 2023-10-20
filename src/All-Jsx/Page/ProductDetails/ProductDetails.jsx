@@ -3,6 +3,7 @@ import NavBar from "../../Component/Navbar/NavBar";
 import Rating from "react-rating";
 import Footer from "../../Component/Footer/Footer";
 import { setCartId } from "../../localStorage/localStroage";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 
 const ProductDetails = () => {
@@ -10,14 +11,16 @@ const ProductDetails = () => {
     const product = useLoaderData();
 
     const handleAddToCart = (id) => {
-        
-        // fetch("http://localhost:5000/carts"
 
         setCartId(id);
     }
 
     return (
-        <>
+        <HelmetProvider>
+            <Helmet>
+                <title>Tech | {product.name}</title>
+                <link rel="canonical" href="https://www.tacobell.com/" />
+            </Helmet>
             <div className="max-w-7xl mx-auto lg:px-0 px-5">
                 <div>
                     <NavBar></NavBar>
@@ -58,7 +61,7 @@ const ProductDetails = () => {
                 </div>
             </div>
             <Footer></Footer>
-        </>
+        </HelmetProvider>
     );
 };
 

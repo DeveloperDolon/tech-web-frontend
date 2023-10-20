@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ParticleBackground from "../../ParticleJs/ParticleBackground";
 import { useContext, useState } from "react";
 import { DataContext } from "../../Context-Api/Data-Context";
@@ -12,6 +12,8 @@ const Login = () => {
 
     const {loginWithEmailPassword, googleLogin} = useContext(DataContext);
     const [showPass, setShowPass] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
 
 
     const handleAnotherButton = () => {
@@ -31,6 +33,7 @@ const Login = () => {
                 'You clicked the button!',
                 'success'
               )
+              navigate(location.state);
         }).catch(err => {
             Swal.fire({
                 icon: 'error',
@@ -40,6 +43,8 @@ const Login = () => {
               })
         })
     }
+
+    console.log(location.state);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -84,6 +89,7 @@ const Login = () => {
                 'You clicked the button!',
                 'success'
               )
+              navigate(location.state);
         }).catch(err => {
             Swal.fire({
                 icon: 'error',
