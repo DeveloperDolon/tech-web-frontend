@@ -27,7 +27,7 @@ const CartPage = () => {
 
     useEffect(() => {
 
-        fetch("https://tech-web-backend-pt5se95zo-dolons-projects.vercel.app/products")
+        fetch("https://tech-web-backend-1f5dqk2cv-dolons-projects.vercel.app/products")
             .then(res => res.json())
             .then(data => {
                 const products = data.filter(item => getAllIds.includes(item._id));

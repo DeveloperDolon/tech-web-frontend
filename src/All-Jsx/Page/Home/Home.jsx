@@ -48,7 +48,6 @@ const Home = () => {
                     </div>
                 </div>
                 
-
                 <div>
                     <Banner></Banner>
                 </div>
@@ -59,7 +58,7 @@ const Home = () => {
 
                 <div className="max-w-7xl mx-auto lg:px-0 px-5 mt-10 grid md:grid-cols-2 grid-cols-1 gap-10">
                     {
-                        brands.map(item => <div data-aos="flip-left" onClick={() => handleClick(item.name)} key={item._id} className={`bg-[#e3f5ff] rounded-xl px-7 py-10 cursor-pointer`}>
+                        brands && brands?.map(item => <div data-aos="flip-left" onClick={() => handleClick(item.name)} key={item._id} className={`bg-[#e3f5ff] rounded-xl px-7 py-10 cursor-pointer`}>
                                 <div className="flex justify-center">
                                     <img className={`h-52 md:w-[50%] w-full rounded-lg`} src={item.image} alt="" />
                                 </div>
