@@ -2,7 +2,6 @@
 import NavBar from "../../Component/Navbar/NavBar";
 import { useEffect, useState } from "react";
 import Footer from "../../Component/Footer/Footer";
-import { getCartIds, removeAllItems, removeItem } from "../../localStorage/localStroage";
 import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import animationData from "../../../../public/animation_lny9azlu.json";
@@ -10,11 +9,10 @@ import { DataContext } from "../../Context-Api/Data-Context";
 import { useContext } from "react";
 
 const CartPage = () => {
-    const {setCartToolTip, cartToolTip} = useContext(DataContext);
+    const {setCartToolTip, cartToolTip, user} = useContext(DataContext);
     const [totalPrice, setTotalPrice] = useState(0);
     const [count, setCount] = useState(1);
     const [cartProduct, setCartProduct] = useState([]);
-    const getAllIds = getCartIds();
 
     const defaultOptions = {
         loop: true,
@@ -27,11 +25,10 @@ const CartPage = () => {
 
     useEffect(() => {
 
-        fetch("https://tech-web-backend-1f5dqk2cv-dolons-projects.vercel.app/products")
+        fetch(`http://localhost:5000/cart/${user.email}`)
             .then(res => res.json())
             .then(data => {
-                const products = data.filter(item => getAllIds.includes(item._id));
-                setCartProduct(products);
+                setCartProduct(data);
             });
     }, [count])
 
@@ -45,7 +42,7 @@ const CartPage = () => {
     }, [cartProduct, count]);
 
     const handleRemoveItem = (id) => {
-
+        const prodId = {id: id};
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -56,16 +53,23 @@ const CartPage = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
+                
+                fetch(`http://localhost:5000/cart/${user.email}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(prodId)
 
-                removeItem(id);
-                setCount(count + 1);
-                setCartToolTip(cartToolTip + 1);
-
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+                }).then(() => {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                    setCount(count + 1);
+                    setCartToolTip(cartToolTip + 1);
+                })
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -74,16 +78,20 @@ const CartPage = () => {
                     footer: '<a href="">Why do I have this issue?</a>'
                 })
             }
-        })
+        }).catch(err => console.log(err));
     }
 
     const handleOrder = () => {
-        Swal.fire(
-            'Order Complete!',
-            'Your order has been taken!!',
-            'success'
-        )
-        removeAllItems();
+
+        fetch(`http://localhost:5000/cart/alldelete/${user.email}`, {
+            method: "DELETE",
+        }).then(() => {
+            Swal.fire(
+                'Order Complete!',
+                'Your order has been taken!!',
+                'success'
+            )
+        }).catch(err => console.log(err));
         setCount(count + 1);
         setCartToolTip(cartToolTip + 1);
     }

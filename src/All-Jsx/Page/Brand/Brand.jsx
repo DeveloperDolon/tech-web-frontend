@@ -12,10 +12,9 @@ const Brand = () => {
     const [brand, setBrand] = useState({});
     const product = useLoaderData();
     const { brandName } = useParams();
-    console.log(product);
 
     useEffect(() => {
-        fetch(`https://tech-web-backend-1f5dqk2cv-dolons-projects.vercel.app/brand/${brandName}`)
+        fetch(`http://localhost:5000/brand/${brandName}`)
             .then(res => res.json())
             .then(data => setBrand(data));
     }, []);

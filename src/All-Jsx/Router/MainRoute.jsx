@@ -21,12 +21,12 @@ const MainRoute = createBrowserRouter([
         children: [
             {
                 path: "/",
-                loader: () => fetch("https://tech-web-backend-1f5dqk2cv-dolons-projects.vercel.app/brands"),
+                loader: () => fetch("http://localhost:5000/brands"),
                 element: <Home></Home>
             },
             {
                 path: "/brands/:brandName",
-                loader: ({params}) => fetch(`https://tech-web-backend-1f5dqk2cv-dolons-projects.vercel.app/brands/${params.brandName}`),
+                loader: ({params}) => fetch(`http://localhost:5000/brands/${params.brandName}`),
                 element: <Brand></Brand>
             },
             {
@@ -35,7 +35,7 @@ const MainRoute = createBrowserRouter([
             },
             {
                 path: "/update/:id",
-                loader: ({params}) => fetch(`https://tech-web-backend-1f5dqk2cv-dolons-projects.vercel.app/products/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
                 element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>
             },
             {
@@ -48,7 +48,7 @@ const MainRoute = createBrowserRouter([
             },
             {
                 path: "/products/:id",
-                loader: ({params}) => fetch(`https://tech-web-backend-1f5dqk2cv-dolons-projects.vercel.app/products/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
                 element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
             },
             {

@@ -2,19 +2,42 @@ import { useLoaderData } from "react-router-dom";
 import NavBar from "../../Component/Navbar/NavBar";
 import Rating from "react-rating";
 import Footer from "../../Component/Footer/Footer";
-import { setCartId } from "../../localStorage/localStroage";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useContext } from "react";
 import { DataContext } from "../../Context-Api/Data-Context";
+import Swal from "sweetalert2";
 
 
 const ProductDetails = () => {
-    const {setCartToolTip, cartToolTip} = useContext(DataContext);
+    const {setCartToolTip, cartToolTip, user} = useContext(DataContext);
     const product = useLoaderData();
 
-    const handleAddToCart = (id) => {
-        setCartToolTip(cartToolTip + 1);
-        setCartId(id);
+    const handleAddToCart = (product) => {
+
+        fetch(`http://localhost:5000/cart/${user.email}`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(product)
+        }).then((res) => {
+            if(res.status === 200) {
+                Swal.fire(
+                    'Product added cart successfully!',
+                    'You clicked the button!',
+                    'success'
+                )
+                setCartToolTip(cartToolTip + 1);
+                return;
+            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Your product is already added to cart.",
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+            
+        })
     }
 
     return (
@@ -52,7 +75,7 @@ const ProductDetails = () => {
                         </div>
 
                         <div className="space-x-8 mt-3">
-                            <button onClick={() => handleAddToCart(product._id)} className="btn bg-indigo-500 text-white hover:bg-slate-600">Add to Cart</button>
+                            <button onClick={() => handleAddToCart(product)} className="btn bg-indigo-500 text-white hover:bg-slate-600">Add to Cart</button>
                         </div>
                     </div>
                 </div>

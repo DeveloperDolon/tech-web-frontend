@@ -7,13 +7,11 @@ import { DataContext } from "../../Context-Api/Data-Context";
 import defaultUser from "../../../assets/user.png";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
-import { getCartIds } from "../../localStorage/localStroage";
 
 const NavBar = () => {
     const { user, logOut, setTheme, theme, cartToolTip } = useContext(DataContext);
     const [showUserOption, setShowUserOption] = useState(false);
     const [cartLength , setCartLength] = useState(0);
-    const localStorageLength = getCartIds();
 
     const navBars = <>
         <li><NavLink className="font-semibold" to="/">Home</NavLink></li>
@@ -24,7 +22,9 @@ const NavBar = () => {
     </>;
 
     useEffect(() => {
-        setCartLength(localStorageLength.length);
+        fetch(`http://localhost:5000/cart/${user.email}`)
+        .then(res => res.json())
+        .then(data => setCartLength(data.length));
     }, [cartToolTip])
 
     const handleSignOut = () => {

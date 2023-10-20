@@ -23,7 +23,7 @@ const UpdateProduct = () => {
 
         const productInfo = { name, brandName, type, rating, price, description, image };
 
-        fetch(`https://tech-web-backend-1f5dqk2cv-dolons-projects.vercel.app/products/${data.name}`, {
+        fetch(`http://localhost:5000/products/${data.name}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
