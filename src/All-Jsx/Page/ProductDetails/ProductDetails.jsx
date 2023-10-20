@@ -4,14 +4,16 @@ import Rating from "react-rating";
 import Footer from "../../Component/Footer/Footer";
 import { setCartId } from "../../localStorage/localStroage";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useContext } from "react";
+import { DataContext } from "../../Context-Api/Data-Context";
 
 
 const ProductDetails = () => {
-
+    const {setCartToolTip, cartToolTip} = useContext(DataContext);
     const product = useLoaderData();
 
     const handleAddToCart = (id) => {
-
+        setCartToolTip(cartToolTip + 1);
         setCartId(id);
     }
 

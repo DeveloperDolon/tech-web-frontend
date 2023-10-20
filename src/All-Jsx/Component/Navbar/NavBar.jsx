@@ -6,10 +6,14 @@ import { useContext, useState } from "react";
 import { DataContext } from "../../Context-Api/Data-Context";
 import defaultUser from "../../../assets/user.png";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
+import { getCartIds } from "../../localStorage/localStroage";
 
 const NavBar = () => {
-    const {user, logOut, setTheme, theme} = useContext(DataContext);
+    const { user, logOut, setTheme, theme, cartToolTip } = useContext(DataContext);
     const [showUserOption, setShowUserOption] = useState(false);
+    const [cartLength , setCartLength] = useState(0);
+    const localStorageLength = getCartIds();
 
     const navBars = <>
         <li><NavLink className="font-semibold" to="/">Home</NavLink></li>
@@ -19,21 +23,25 @@ const NavBar = () => {
         <li><NavLink className="font-semibold" to="/jd">Blog</NavLink></li>
     </>;
 
+    useEffect(() => {
+        setCartLength(localStorageLength.length);
+    }, [cartToolTip])
+
     const handleSignOut = () => {
         logOut()
-        .then(() => {
-            Swal.fire(
-                'Log out Successful!',
-                'You clicked the button!',
-                'success'
-              )
-        }).catch(err => console.log(err));
+            .then(() => {
+                Swal.fire(
+                    'Log out Successful!',
+                    'You clicked the button!',
+                    'success'
+                )
+            }).catch(err => console.log(err));
     }
 
     const handleThemeChange = (e) => {
         const htmlContainer = document.querySelector("#html");
-        if(e.target.id === 'day-night') {
-            if(htmlContainer.getAttribute("data-theme") === "dark") {
+        if (e.target.id === 'day-night') {
+            if (htmlContainer.getAttribute("data-theme") === "dark") {
                 htmlContainer.setAttribute("data-theme", "light");
                 setTheme(true);
                 return;
@@ -45,14 +53,14 @@ const NavBar = () => {
 
     return (
         <>
-            <div className={`navbar relative`}>
+            <div className={`navbar relative py-3`}>
                 <div className="navbar-start">
                     <div className={`dropdown z-40 ${theme ? "text-black" : "text-white"}`}>
                         <label tabIndex={0} className="btn sm:px-3 px-1 btn-ghost  lg:hidden bg-white text-black hover:bg-slate-400">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52 ${theme ? "shadow" : "shadow-white shadow"}`}>
-                           {navBars}
+                            {navBars}
                         </ul>
                     </div>
                     <div>
@@ -61,12 +69,12 @@ const NavBar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                       {navBars}
+                        {navBars}
                     </ul>
                 </div>
                 <div className="navbar-end sm:gap-5 gap-3 flex-wrap">
                     <div className="text-center">
-                    <label
+                        <label
                             onClick={handleThemeChange}
                             className="swap swap-rotate p-3 rounded-full shadow-md bg-slate-200">
 
@@ -86,27 +94,32 @@ const NavBar = () => {
 
                         </label>
                     </div>
-                    <NavLink to="/carts"
-                    className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "text-sky-500 md:text-2xl text-xl" : "md:text-2xl text-xl"
-                    }
-                    ><FaShoppingCart></FaShoppingCart></NavLink>
 
-                    { 
+                    <div className={`tooltip mr-3 md:text-sm font-semibold text-xs tooltip-right py-1 tooltip-${cartLength > 0 ? "open" : "close"} tooltip-error`} data-tip={cartLength}>
+                        <NavLink to="/carts"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "text-sky-500 md:text-3xl text-xl relative" : "relative md:text-3xl text-xl text-gray-500"
+                            }
+                        >
+                            <FaShoppingCart></FaShoppingCart>
+                        </NavLink>
+                    </div>
+
+                    {
                         user ?
-                        <>
-                            <div>
-                                <img onClick={() => setShowUserOption(!showUserOption)} className="md:w-12 w-9 rounded-full cursor-pointer" src={user.photoURL ? user.photoURL : defaultUser} alt="" />
+                            <>
+                                <div>
+                                    <img onClick={() => setShowUserOption(!showUserOption)} className="md:w-12 w-9 rounded-full cursor-pointer" src={user.photoURL ? user.photoURL : defaultUser} alt="" />
 
-                                <div className={`absolute duration-300 ease-in right-1 top-[80%] ${showUserOption ? "px-6 py-7 w-auto" : "w-0 h-0"} overflow-hidden bg-white shadow-xl rounded-xl z-40`}>
-                                    <ul className="space-y-2">
-                                        <li className="md:text-base text-sm font-semibold text-black">{user.displayName}</li>
-                                        <li className="md:text-base text-sm font-semibold"><button onClick={handleSignOut} className="flex gap-2 items-center btn btn-sm"><BiLogOutCircle className="md:text-xl text-lg"></BiLogOutCircle> Log out</button></li>
-                                    </ul>
+                                    <div className={`absolute duration-300 ease-in right-1 top-[80%] ${showUserOption ? "px-6 py-7 w-auto" : "w-0 h-0"} overflow-hidden bg-white shadow-xl rounded-xl z-40`}>
+                                        <ul className="space-y-2">
+                                            <li className="md:text-base text-sm font-semibold text-black">{user.displayName}</li>
+                                            <li className="md:text-base text-sm font-semibold"><button onClick={handleSignOut} className="flex gap-2 items-center btn btn-sm"><BiLogOutCircle className="md:text-xl text-lg"></BiLogOutCircle> Log out</button></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </> : 
-                         <Link to="/login" className="btn-primary sm:py-2 py-1 sm:px-5 px-2 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
+                            </> :
+                            <Link to="/login" className="btn-primary sm:py-2 py-1 sm:px-5 px-2 rounded-md font-semibold md:text-base text-xs text-white capitalize">Login</Link>
                     }
 
                 </div>

@@ -13,6 +13,7 @@ const ContextApi = ({children}) => {
     const googleProvider = new GoogleAuthProvider();
     const [loading, setLoading] = useState(true);
     const [theme, setTheme] = useState(true);
+    const [cartToolTip, setCartToolTip] = useState(1);
 
     const auth = getAuth(app);
 
@@ -52,7 +53,9 @@ const ContextApi = ({children}) => {
         loading,
         googleLogin,
         theme,
-        setTheme
+        setTheme,
+        cartToolTip,
+        setCartToolTip
     }
 
     return (

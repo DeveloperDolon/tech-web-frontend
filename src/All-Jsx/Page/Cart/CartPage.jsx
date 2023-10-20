@@ -6,8 +6,11 @@ import { getCartIds, removeAllItems, removeItem } from "../../localStorage/local
 import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import animationData from "../../../../public/animation_lny9azlu.json";
+import { DataContext } from "../../Context-Api/Data-Context";
+import { useContext } from "react";
 
 const CartPage = () => {
+    const {setCartToolTip, cartToolTip} = useContext(DataContext);
     const [totalPrice, setTotalPrice] = useState(0);
     const [count, setCount] = useState(1);
     const [cartProduct, setCartProduct] = useState([]);
@@ -56,6 +59,7 @@ const CartPage = () => {
 
                 removeItem(id);
                 setCount(count + 1);
+                setCartToolTip(cartToolTip + 1);
 
                 Swal.fire(
                     'Deleted!',
@@ -81,6 +85,7 @@ const CartPage = () => {
         )
         removeAllItems();
         setCount(count + 1);
+        setCartToolTip(cartToolTip + 1);
     }
 
     return (

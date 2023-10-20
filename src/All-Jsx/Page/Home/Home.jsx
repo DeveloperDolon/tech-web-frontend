@@ -33,20 +33,25 @@ const Home = () => {
     });
 
     return (
-        <div style={{
-            background: `url("${bgImg}") top center no-repeat`,
-            backgroundSize: "cover"
-        }}
-            className={`md:h-screen h-auto md:bg-cover`}
+        <div
+            className={`h-auto md:bg-cover`}
         >
-            <div className={`${theme ? "bg-transparent" : "bg-black" }`}>
-                <div className="max-w-7xl mx-auto">
-                    <NavBar className="text-white"></NavBar>
+            <div 
+             style={{
+                background: `url("${bgImg}") top center no-repeat`,
+                backgroundSize: "cover"
+            }}
+            className={`md:pb-0 pb-10`}>
+                <div className={`${theme ? "bg-transparent" : "bg-black"}`}>
+                    <div className="max-w-7xl mx-auto">
+                        <NavBar className="text-white"></NavBar>
+                    </div>
                 </div>
-            </div>
+                
 
-            <div>
-                <Banner></Banner>
+                <div>
+                    <Banner></Banner>
+                </div>
             </div>
 
             <div className="md:my-32 my-20">
