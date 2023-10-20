@@ -7,10 +7,12 @@ import app from "../firebase/firebase.config";
 
 export const DataContext = createContext();
 
+
 const ContextApi = ({children}) => {
     const [user, setUser] = useState(null);
     const googleProvider = new GoogleAuthProvider();
     const [loading, setLoading] = useState(true);
+    const [theme, setTheme] = useState(true);
 
     const auth = getAuth(app);
 
@@ -48,7 +50,9 @@ const ContextApi = ({children}) => {
         user,
         logOut,
         loading,
-        googleLogin
+        googleLogin,
+        theme,
+        setTheme
     }
 
     return (

@@ -8,7 +8,7 @@ import defaultUser from "../../../assets/user.png";
 import Swal from "sweetalert2";
 
 const NavBar = () => {
-    const {user, logOut} = useContext(DataContext);
+    const {user, logOut, setTheme, theme} = useContext(DataContext);
     const [showUserOption, setShowUserOption] = useState(false);
 
     const navBars = <>
@@ -30,15 +30,28 @@ const NavBar = () => {
         }).catch(err => console.log(err));
     }
 
+    const handleThemeChange = (e) => {
+        const htmlContainer = document.querySelector("#html");
+        if(e.target.id === 'day-night') {
+            if(htmlContainer.getAttribute("data-theme") === "dark") {
+                htmlContainer.setAttribute("data-theme", "light");
+                setTheme(true);
+                return;
+            }
+            htmlContainer.setAttribute("data-theme", "dark");
+            setTheme(false);
+        }
+    }
+
     return (
         <>
             <div className={`navbar relative`}>
                 <div className="navbar-start">
-                    <div className="dropdown z-40 text-black">
-                        <label tabIndex={0} className="btn sm:px-3 px-1 btn-ghost  lg:hidden bg-white hover:bg-slate-400">
+                    <div className={`dropdown z-40 ${theme ? "text-black" : "text-white"}`}>
+                        <label tabIndex={0} className="btn sm:px-3 px-1 btn-ghost  lg:hidden bg-white text-black hover:bg-slate-400">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52 ${theme ? "shadow" : "shadow-white shadow"}`}>
                            {navBars}
                         </ul>
                     </div>
@@ -54,6 +67,7 @@ const NavBar = () => {
                 <div className="navbar-end sm:gap-5 gap-3 flex-wrap">
                     <div className="text-center">
                     <label
+                            onClick={handleThemeChange}
                             className="swap swap-rotate p-3 rounded-full shadow-md bg-slate-200">
 
                             <input id="day-night" type="checkbox" />
