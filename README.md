@@ -1,5 +1,6 @@
 
 ## live-link: https://assignment-ten-cacea.web.app/
+**Technologies :** React js, Tailwind css, Daisy UI, Firebase, JWT, Node js, Express js, and Mongodb.
 
 - **Brand-Based Navigation** : Users can easily navigate the website by clicking on brand images to access specific product pages for each brand. This feature makes it convenient for users to explore products within their preferred brand.
   
